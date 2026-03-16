@@ -54,17 +54,17 @@ ds-cloudengineer-energymonitoring/
 ├── README.md
 │
 ├── scripts/
-│   ├── test\\\_broker\\\_connection.py
-│   └── test\\\_influx\\\_write.py
+│   ├── test_broker_connection.py
+│   └── test_influx_write.py
 │
 ├── producers/
-│   ├── single\\\_device\\\_producer.py
-│   └── fleet\\\_device\\\_simulator.py
+│   ├── single_device_producer.py
+│   └── fleet_device_simulator.py
 │
 ├── consumers/
-│  ├── queue\\\_message\\\_logger.py
-│  ├── minimal\\\_amqp\\\_to\\\_influx.py
-│  └── amqp\\\_to\\\_influx\\\_service.py    
+│  ├── queue_message_logger.py
+│  ├── minimal_amqp_to_influx.py
+│  └── amqp_to_influx_service.py    
 ├── screenshots/
 │   ├── Screenshot-Grafana-Dasboard.png
 │   ├── Screenshot-InfluxDB.png
@@ -102,7 +102,7 @@ source venv/bin/activate
 Windows:
 
 ```bash
-venv\\\\Scripts\\\\activate
+venv\Scripts\activate
 ```
 
 \---
@@ -135,23 +135,23 @@ cp .env.example .env
 Edit `.env`:
 
 ```
-CLOUDAMQP\\\_URL=amqps://USERNAME:PASSWORD@raccoon.lmq.cloudamqp.com/VHOST
+CLOUDAMQP_URL=amqps://USERNAME:PASSWORD@raccoon.lmq.cloudamqp.com/VHOST
 
-INFLUX3\\\_HOST=https://us-east-1-1.aws.cloud2.influxdata.com
-INFLUX3\\\_ORG=Dev
-INFLUX3\\\_DATABASE=room-monitoring
-INFLUX3\\\_TOKEN=YOUR\\\_INFLUX\\\_TOKEN
+INFLUX3_HOST=https://us-east-1-1.aws.cloud2.influxdata.com
+INFLUX3_ORG=Dev
+INFLUX3_DATABASE=room-monitoring
+INFLUX3_TOKEN=YOUR_INFLUX_TOKEN
 ```
 
 Required values:
 
 |Variable|Description|
 |-|-|
-|CLOUDAMQP\_URL|CloudAMQP broker connection URL|
-|INFLUX3\_HOST|InfluxDB Cloud endpoint|
-|INFLUX3\_ORG|Influx organization|
-|INFLUX3\_DATABASE|Database name|
-|INFLUX3\_TOKEN|API token|
+|CLOUDAMQP_URL|CloudAMQP broker connection URL|
+|INFLUX3_HOST|InfluxDB Cloud endpoint|
+|INFLUX3_ORG|Influx organization|
+|INFLUX3_DATABASE|Database name|
+|INFLUX3_TOKEN|API token|
 
 \---
 
@@ -159,7 +159,7 @@ Required values:
 
 ## scripts/
 
-### test\_broker\_connection.py
+### test_broker_connection.py
 
 Purpose:
 
@@ -175,19 +175,19 @@ Steps performed:
 Run:
 
 ```bash
-python scripts/test\\\_broker\\\_connection.py
+python scripts/test_broker_connection.py
 ```
 
 Expected output:
 
 ```
-\\\[OK] Queue declared
-\\\[OK] Test message published
+[OK] Queue declared
+[OK] Test message published
 ```
 
 \---
 
-### test\_influx\_write.py
+### test_influx_write.py
 
 Purpose:
 
@@ -202,7 +202,7 @@ Functions:
 Run:
 
 ```bash
-python scripts/test\\\_influx\\\_write.py
+python scripts/test_influx_write.py
 ```
 
 Expected output:
@@ -222,12 +222,12 @@ Producer scripts simulate IoT devices sending telemetry.
 Queue used:
 
 ```
-energy\\\_telemetry
+energy_telemetry
 ```
 
 \---
 
-## single\_device\_producer.py
+## single_device_producer.py
 
 Simulates one IoT device.
 
@@ -235,14 +235,14 @@ Telemetry example:
 
 ```json
 {
-    "device\\\_id": "meter-001",
+    "device_id": "meter-001",
     "voltage": 230.5,
     "current": 4.2,
     "power": 967.3,
     "energy": 15.6,
-    "power\\\_factor": 0.94,
-    "signal\\\_rssi": -68,
-    "ts": now\\\_iso(),
+    "power_factor": 0.94,
+    "signal_rssi": -68,
+    "ts": now_iso(),
 
 }
 ```
@@ -250,12 +250,12 @@ Telemetry example:
 Run:
 
 ```bash
-python producers/single\\\_device\\\_producer.py
+python producers/single_device_producer.py
 ```
 
 \---
 
-## fleet\_device\_simulator.py
+## fleet_device_simulator.py
 
 Simulates multiple devices concurrently.
 
@@ -268,7 +268,7 @@ Features:
 Run:
 
 ```bash
-python producers/fleet\\\_device\\\_simulator.py
+python producers/fleet_device_simulator.py
 ```
 
 Default simulation:
@@ -280,8 +280,8 @@ Default simulation:
 Example output:
 
 ```
-\\\[PUB] meter-005 -> {...}
-\\\[PUB] meter-012 -> {...}
+[PUB] meter-005 -> {...}
+[PUB] meter-012 -> {...}
 ```
 
 \---
@@ -292,7 +292,7 @@ Consumers read queue messages and process them.
 
 \---
 
-## queue\_message\_logger.py
+## queue_message_logger.py
 
 Simple debugging consumer.
 
@@ -303,18 +303,18 @@ Inspect raw messages in the queue.
 Run:
 
 ```bash
-python consumers/queue\\\_message\\\_logger.py
+python consumers/queue_message_logger.py
 ```
 
 Output example:
 
 ```
-\\\[MSG] {"device\\\_id":"meter-001",...}
+[MSG] {"device_id":"meter-001",...}
 ```
 
 \---
 
-## minimal\_amqp\_to\_influx.py
+## minimal_amqp_to_influx.py
 
 Minimal ingestion pipeline.
 
@@ -326,23 +326,23 @@ AMQP Queue → InfluxDB
 
 Stores limited fields:
 
-* device\_id
+* device_id
 * voltage
 * current
 * power
 * energy
-* power\_factor
+* power_factor
 * frequency
 
 Run:
 
 ```bash
-python consumers/minimal\\\_amqp\\\_to\\\_influx.py
+python consumers/minimal_amqp_to_influx.py
 ```
 
 \---
 
-## amqp\_to\_influx\_service.py
+## amqp_to_influx_service.py
 
 Full ingestion service used for the final workshop.
 
@@ -362,24 +362,24 @@ Stored fields:
 
 |Tag|Field|
 |-|-|
-|device\_id|voltage|
+|device_id|voltage|
 ||current|
 ||power|
 ||energy|
-||power\_factor|
+||power_factor|
 ||frequency|
-||signal\_rssi|
+||signal_rssi|
 
 Run:
 
 ```bash
-python consumers/amqp\\\_to\\\_influx\\\_service.py
+python consumers/amqp_to_influx_service.py
 ```
 
 Output:
 
 ```
-\\\[WRITE] meter-004 -> InfluxDB
+[WRITE] meter-004 -> InfluxDB
 ```
 
 \---
@@ -395,7 +395,7 @@ Open two terminals.
 Start ingestion service.
 
 ```bash
-python consumers/amqp\\\_to\\\_influx\\\_service.py
+python consumers/amqp_to_influx_service.py
 ```
 
 \---
@@ -405,7 +405,7 @@ python consumers/amqp\\\_to\\\_influx\\\_service.py
 Start fleet simulator.
 
 ```bash
-python producers/fleet\\\_device\\\_simulator.py
+python producers/fleet_device_simulator.py
 ```
 
 \---
@@ -415,13 +415,13 @@ python producers/fleet\\\_device\\\_simulator.py
 Producer output:
 
 ```
-\\\[PUB] meter-003 -> {...}
+[PUB] meter-003 -> {...}
 ```
 
 Consumer output:
 
 ```
-\\\[WRITE] meter-003 -> InfluxDB
+[WRITE] meter-003 -> InfluxDB
 ```
 
 CloudAMQP:
@@ -447,8 +447,8 @@ Example SQL queries.
 ## Latest measurements
 
 ```sql
-SELECT \\\*
-FROM energy\\\_telemetry
+SELECT *
+FROM energy_telemetry
 ORDER BY time DESC
 LIMIT 20;
 ```
@@ -460,7 +460,7 @@ LIMIT 20;
 ```sql
 SELECT
 AVG(power)
-FROM energy\\\_telemetry;
+FROM energy_telemetry;
 ```
 
 \---
@@ -469,10 +469,10 @@ FROM energy\\\_telemetry;
 
 ```sql
 SELECT
-device\\\_id,
+device_id,
 SUM(energy)
-FROM energy\\\_telemetry
-GROUP BY device\\\_id;
+FROM energy_telemetry
+GROUP BY device_id;
 ```
 
 \---
@@ -488,7 +488,7 @@ Visualizes data from InfluxDB database in a Grafana dashboard.
 Ensure you have the following setup:
 
 * A Grafana account.
-* A data source \[e.g., InfluxDB]
+* A data source [e.g., InfluxDB]
 * Metrics from system/service.
 
 \---
@@ -499,7 +499,7 @@ Ensure you have the following setup:
 2. Click Connections > Data sources.
 3. Click Add new data source and select InfluxDB.
 4. Configure settings (URL, Organization, Bucket, Toekn, etc.)
-5. Click Save \& Test to ensure connectivity.
+5. Click Save & Test to ensure connectivity.
 
 \---
 
@@ -539,7 +539,7 @@ Query:
 ```flux
 from(bucket: "energy-monitoring")
 |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
-|> filter(fn: (r) => r.\_measurement == "energy\_telemetry" and r.\_field == "power")
+|> filter(fn: (r) => r._measurement == "energy_telemetry" and r._field == "power")
 |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
 |> yield(name: "mean")
 ```
@@ -557,8 +557,8 @@ Query:
 ```flux
 from(bucket: "energy-monitoring")
 |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
-|> filter(fn: (r) => r.\_measurement == "energy\_telemetry" and r.\_field == "energy")
-|> group(columns: \["device\_id"])
+|> filter(fn: (r) => r._measurement == "energy_telemetry" and r._field == "energy")
+|> group(columns: ["device\_id"])
 |> aggregateWindow(every: v.windowPeriod, fn: sum, createEmpty: false)
 |> yield(name: "sum")
 ```
@@ -576,7 +576,7 @@ Query:
 ```flux
 from(bucket: "energy-monitoring")
 |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
-|> filter(fn: (r) => r.\_measurement == "energy\_telemetry" and r.\_field == "current")
+|> filter(fn: (r) => r._measurement == "energy_telemetry" and r._field == "current")
 |> last()
 ```
 
@@ -594,14 +594,14 @@ This folder contains screenshot images from the Grafana dashboard, InfluxDB data
 
 Check:
 
-* CLOUDAMQP\_URL
+* CLOUDAMQP_URL
 * network connectivity
 * TLS port
 
 Test with:
 
 ```bash
-python scripts/test\\\_broker\\\_connection.py
+python scripts/test_broker_connection.py
 ```
 
 \---
@@ -623,7 +623,7 @@ Solution:
 Test with:
 
 ```bash
-python scripts/test\\\_influx\\\_write.py
+python scripts/test_influx_write.py
 ```
 
 \---
