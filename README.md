@@ -61,15 +61,15 @@ ds-cloudengineer-energymonitoring/
 │   ├── single\\\_device\\\_producer.py
 │   └── fleet\\\_device\\\_simulator.py
 │
-└── consumers/
-    ├── queue\\\_message\\\_logger.py
-    ├── minimal\\\_amqp\\\_to\\\_influx.py
-    └── amqp\\\_to\\\_influx\\\_service.py    
-└── screenshots/
-    ├── Screenshot-Grafana-Dasboard.png
-    ├── Screenshot-InfluxDB.png
-    ├── Screenshot-LavinMQ.png
-    └── dashboard.json        
+├── consumers/
+│  ├── queue\\\_message\\\_logger.py
+│  ├── minimal\\\_amqp\\\_to\\\_influx.py
+│  └── amqp\\\_to\\\_influx\\\_service.py    
+├── screenshots/
+│   ├── Screenshot-Grafana-Dasboard.png
+│   ├── Screenshot-InfluxDB.png
+│   ├── Screenshot-LavinMQ.png
+│   └── dashboard.json        
 ```
 
 \---
