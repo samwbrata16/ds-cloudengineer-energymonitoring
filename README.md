@@ -68,8 +68,8 @@ ds-cloudengineer-energymonitoring/
 ├── screenshots/
 │   ├── Screenshot-Grafana-Dasboard.png
 │   ├── Screenshot-InfluxDB.png
-│   └──  Screenshot-LavinMQ.png
-     
+│   └── Screenshot-LavinMQ.png
+
 ```
 
 \---
