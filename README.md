@@ -536,11 +536,13 @@ time series chart
 
 Query:
 
+```flux
 from(bucket: "energy-monitoring")
 |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
 |> filter(fn: (r) => r.\_measurement == "energy\_telemetry" and r.\_field == "power")
 |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)
 |> yield(name: "mean")
+```
 
 \---
 
@@ -552,12 +554,14 @@ bar chart
 
 Query:
 
+```flux
 from(bucket: "energy-monitoring")
 |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
 |> filter(fn: (r) => r.\_measurement == "energy\_telemetry" and r.\_field == "energy")
 |> group(columns: \["device\_id"])
 |> aggregateWindow(every: v.windowPeriod, fn: sum, createEmpty: false)
 |> yield(name: "sum")
+```
 
 \---
 
@@ -569,10 +573,12 @@ gauge chart
 
 Query:
 
+```flux
 from(bucket: "energy-monitoring")
 |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
 |> filter(fn: (r) => r.\_measurement == "energy\_telemetry" and r.\_field == "current")
 |> last()
+```
 
 \---
 
