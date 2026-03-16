@@ -330,9 +330,6 @@ Stores limited fields:
 * voltage
 * current
 * power
-* energy
-* power_factor
-* frequency
 
 Run:
 
